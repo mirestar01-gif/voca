@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>중학 영단어</title>
+<meta name="theme-color" content="#1f6f5c">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="영단어">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+:root{--bg:#f6f4ee;--card:#fff;--ink:#1d2321;--sub:#6b736f;--line:#e4e0d6;--pri:#1f6f5c;--pri2:#e3f0eb;--ok:#2e8b57;--bad:#d1495b;--star:#e9a400}
+@media (prefers-color-scheme:dark){:root{--bg:#141816;--card:#1e2421;--ink:#eef2ef;--sub:#9aa4a0;--line:#2d3532;--pri:#5cc3a4;--pri2:#21342e;--ok:#5cc38a;--bad:#ef6f7f;--star:#f2c14e}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
+body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+header{position:sticky;top:0;z-index:5;background:var(--bg);padding:calc(12px + env(safe-area-inset-top)) 16px 10px;display:flex;align-items:center;gap:10px}
+header h1{font-size:20px;margin:0;flex:1}
+.back{border:0;background:none;font-size:22px;color:var(--ink);padding:4px 8px 4px 0}
+main{padding:0 16px;max-width:640px;margin:0 auto}
+.seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px;margin:4px 0 14px}
+.seg button{flex:1;border:0;background:none;padding:9px 0;border-radius:9px;font-size:15px;color:var(--sub);font-weight:600}
+.seg button.on{background:var(--pri);color:#fff}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.stat .big{font-size:28px;font-weight:800}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;background:var(--pri)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.day{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center;font-weight:700}
+.day small{display:block;color:var(--sub);font-weight:500;margin-top:4px;font-size:12px}
+.day.done{border-color:var(--pri);background:var(--pri2)}
+.row{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:8px}
+.row .t{flex:1;min-width:0}
+.row b{font-size:18px}
+.ipa{color:var(--sub);font-size:14px;font-family:"Lucida Sans Unicode","Arial Unicode MS",sans-serif}
+.mean{margin-top:2px}
+.ib{border:0;background:var(--pri2);color:var(--pri);border-radius:10px;width:40px;height:40px;font-size:18px;flex:none}
+.star{background:none;color:var(--line);font-size:22px}.star.on{color:var(--star)}
+.btn{display:block;width:100%;border:0;border-radius:14px;padding:15px;font-size:16px;font-weight:700;background:var(--pri);color:#fff;margin:8px 0}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.flash{background:var(--card);border:1px solid var(--line);border-radius:22px;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;margin:6px 0 14px;user-select:none}
+.flash .w{font-size:40px;font-weight:800;word-break:break-word}
+.flash .ipa{font-size:18px;margin-top:6px}
+.flash .m{font-size:24px;margin-top:20px;min-height:32px}
+.flash .hint{color:var(--sub);font-size:13px;margin-top:18px}
+.cnt{color:var(--sub);text-align:center;font-size:14px}
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:15px;font-size:17px;margin-bottom:10px;color:var(--ink)}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--card))}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--card))}
+input[type=search]{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:16px;margin-bottom:12px}
+.lbl{font-size:13px;color:var(--sub);margin:14px 0 8px;font-weight:600}
+.chip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:6px;background:var(--pri2);color:var(--pri);margin-left:6px;vertical-align:middle;font-weight:600}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:9}
+nav button{flex:1;border:0;background:none;padding:9px 0 8px;color:var(--sub);font-size:11px}
+nav button span{display:block;font-size:21px;margin-bottom:2px}
+nav button.on{color:var(--pri);font-weight:700}
+.toggle{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px;margin-bottom:8px}
+.empty{text-align:center;color:var(--sub);padding:40px 0}
+</style>
+</head>
+<body>
+<header><button class="back" id="back" hidden>‹</button><h1 id="title">영단어</h1></header>
+<main id="app"></main>
+<nav id="nav">
+  <button data-tab="home" class="on"><span>📚</span>학습</button>
+  <button data-tab="quiz"><span>✏️</span>퀴즈</button>
+  <button data-tab="wrong"><span>❗</span>오답노트</button>
+  <button data-tab="search"><span>🔍</span>찾기</button>
+</nav>
+<script src="words.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
